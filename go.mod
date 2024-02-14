@@ -1,6 +1,5 @@
 module github.com/qaa-engineer/short
 
-
 go 1.20
 
 require (
