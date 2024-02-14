@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/go-chi/chi/v5"
-	"github.com/qaa-engineer/shortener/internal/hasher"
-	"github.com/qaa-engineer/shortener/internal/storage"
+	"github.com/qaa-engineer/short/internal/hasher"
+	"github.com/qaa-engineer/short/internal/storage"
 
 	"io"
 	"net/http"
