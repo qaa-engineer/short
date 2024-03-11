@@ -4,8 +4,8 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
+	"log"
 	"math/big"
-	"os"
 
 	"github.com/itchyny/base58-go"
 )
@@ -32,8 +32,7 @@ func base58Encoded(bytes []byte) string {
 	encoding := base58.BitcoinEncoding
 	encoded, err := encoding.Encode(bytes)
 	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	return string(encoded)
 }
