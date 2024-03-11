@@ -1,12 +1,13 @@
 package handlers
 
 import (
+	"io"
+	"net/http"
+	"net/url"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/qaa-engineer/short/internal/hasher"
 	"github.com/qaa-engineer/short/internal/storage"
-
-	"io"
-	"net/http"
 )
 
 type URLShortenerHandler struct {
@@ -29,13 +30,17 @@ func (handler *URLShortenerHandler) PostHandler(w http.ResponseWriter, r *http.R
 		return
 	}
 
-	res := string(body)
-	shortLink, err := hasher.GetShortLink(res)
+	res, err := url.Parse(string(body))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+	fullLink := res.String()
+	shortLink, err := hasher.GetShortLink(fullLink)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 
-	handler.URLRepository.AddURL(shortLink, res)
+	handler.URLRepository.AddURL(shortLink, fullLink)
 
 	w.WriteHeader(http.StatusCreated)
 	host := r.Host
