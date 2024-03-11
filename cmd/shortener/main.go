@@ -1,11 +1,12 @@
 package main
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/qaa-engineer/short/internal/handlers"
-
-	"net/http"
 )
 
 func main() {
@@ -20,6 +21,6 @@ func main() {
 
 	err := http.ListenAndServe(":8080", r)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
