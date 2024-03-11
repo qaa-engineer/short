@@ -18,7 +18,10 @@ func GetShortLink(input string) (string, error) {
 
 	urlHashBytes := sha256Of(input)
 	generatedNumber := new(big.Int).SetBytes(urlHashBytes).Uint64()
-	finalString := base58Encoded([]byte(fmt.Sprintf("%d", generatedNumber)))
+	finalString, err := base58Encoded([]byte(fmt.Sprintf("%d", generatedNumber)))
+	if err != nil {
+		log.Fatal(err)
+	}
 	return finalString[:8], nil
 }
 
@@ -34,5 +37,5 @@ func base58Encoded(bytes []byte) (string, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return string(encoded)
+	return string(encoded), err
 }
