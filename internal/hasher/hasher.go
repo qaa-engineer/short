@@ -4,7 +4,6 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
-	"log"
 	"math/big"
 
 	"github.com/itchyny/base58-go"
