@@ -20,7 +20,7 @@ func GetShortLink(input string) (string, error) {
 	generatedNumber := new(big.Int).SetBytes(urlHashBytes).Uint64()
 	finalString, err := base58Encoded([]byte(fmt.Sprintf("%d", generatedNumber)))
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 	return finalString[:8], nil
 }
